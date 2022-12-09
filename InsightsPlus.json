@@ -77,7 +77,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -134,7 +134,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -274,7 +274,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -581,7 +581,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -674,7 +674,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -802,7 +802,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -884,16 +884,6 @@
         {
           "exemplar": true,
           "expr": "sum(cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!=\"master\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!=\"master\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -972,7 +962,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -1061,7 +1051,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1188,7 +1178,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -1349,7 +1339,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -1426,7 +1416,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "targets": [
         {
           "exemplar": true,
@@ -1606,7 +1596,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1710,7 +1700,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1820,7 +1810,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1930,7 +1920,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2072,7 +2062,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2186,7 +2176,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2286,7 +2276,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2426,7 +2416,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2611,7 +2601,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2789,7 +2779,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2904,7 +2894,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3039,7 +3029,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3157,7 +3147,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.11",
+      "pluginVersion": "7.5.15",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3224,8 +3214,8 @@
     "list": []
   },
   "time": {
-    "from": "2022-07-22T23:00:00.000Z",
-    "to": "2022-08-08T22:59:59.000Z"
+    "from": "2022-11-28T09:24:08.964Z",
+    "to": "2022-11-28T23:59:59.000Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -3255,5 +3245,5 @@
   "timezone": "",
   "title": "Container Platform/Cluster Metrics",
   "uid": "194e87c86fabc92da5959feb06e8353f",
-  "version": 16
+  "version": 19
 }
