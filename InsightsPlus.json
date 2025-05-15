@@ -3,24 +3,37 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -29,17 +42,31 @@
       },
       "id": 53,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Cluster Health",
       "type": "row"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -66,6 +93,8 @@
       "id": 119,
       "options": {
         "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -77,9 +106,13 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "kube_daemonset_status_current_number_scheduled{daemonset=~\".*\"} / kube_daemonset_status_desired_number_scheduled{daemonset=~\".*\"} * 100",
           "format": "time_series",
@@ -90,8 +123,6 @@
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Kube daemonset Percentage up",
       "type": "bargauge"
     },
@@ -100,7 +131,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -134,7 +168,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -144,18 +178,22 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "expr": "code:cluster:ingress_http_request_count:rate5m:sum",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "HTTP {{code}}",
+          "range": true,
           "refId": "A",
           "step": 120
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Cluster Http Requests",
       "tooltip": {
         "shared": true,
@@ -164,9 +202,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -175,22 +211,16 @@
           "format": "short",
           "label": "Req",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -231,10 +261,12 @@
       },
       "aliasColors": {},
       "bars": false,
-      "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "description": "Cluster operators in Progress, Degraded, Failing, etc...",
       "fieldConfig": {
@@ -274,7 +306,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -284,6 +316,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "(cluster_operator_conditions{condition!~\"Available|Upgradeable|RetrievedUpdates|Disabled\"} == 1)",
           "format": "time_series",
@@ -304,9 +340,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Cluster Operators by Failed Condition",
       "tooltip": {
         "shared": true,
@@ -315,9 +349,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -327,46 +359,57 @@
           "format": "short",
           "label": "Conditions",
           "logBase": 1,
-          "max": null,
           "min": "-0.05",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
@@ -375,84 +418,73 @@
         "y": 7
       },
       "id": 109,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "Pod",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "sum(haproxy_up)",
           "refId": "A"
         }
       ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Haproxy Status - Infra",
-      "type": "singlestat",
-      "valueFontSize": "150%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
@@ -461,44 +493,29 @@
         "y": 7
       },
       "id": 115,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "Pod",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_info{namespace=\"openshift-ingress\", pod=~\"router-default.*\"})",
           "instant": false,
@@ -507,24 +524,14 @@
           "refId": "A"
         }
       ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Haproxy Status - User",
-      "type": "singlestat",
-      "valueFontSize": "170%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -532,11 +539,13 @@
           },
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -563,7 +572,6 @@
         "y": 7
       },
       "id": 107,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -581,9 +589,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "max(etcd_server_has_leader)",
           "hide": false,
@@ -592,8 +604,6 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "ETCD Status",
       "type": "stat"
     },
@@ -637,7 +647,10 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -674,7 +687,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -684,6 +697,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "(apiserver_client_certificate_expiration_seconds_count{job=\"apiserver\"} > 0 and on(job) histogram_quantile(0.01, sum by(job, le) (rate(apiserver_client_certificate_expiration_seconds_bucket{job=\"apiserver\"}[5m]))))/60/60",
           "instant": false,
           "legendFormat": "{{ apiserver }} / {{ instance }}",
@@ -700,9 +717,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "API Server Certificate Expiration",
       "tooltip": {
         "shared": true,
@@ -711,9 +726,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "series",
-        "name": null,
         "show": false,
         "values": [
           "current"
@@ -721,31 +734,26 @@
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "h",
           "label": "DAYS",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -753,11 +761,13 @@
           },
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -784,7 +794,6 @@
         "y": 10
       },
       "id": 32,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -802,9 +811,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "cluster:node_instance_type_count:sum{label_node_role_kubernetes_io!=\"master\"}",
           "hide": false,
@@ -817,27 +830,43 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "Excludes control plane",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
         "overrides": []
-      },
-      "format": "bytes",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 2,
@@ -846,42 +875,29 @@
         "y": 10
       },
       "id": 36,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "RAM",
-      "postfixFontSize": "30%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!=\"master\"})",
           "hide": false,
@@ -890,22 +906,14 @@
           "refId": "B"
         }
       ],
-      "thresholds": "",
       "title": "Allocatable Memory",
-      "type": "singlestat",
-      "valueFontSize": "70%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -913,11 +921,13 @@
           },
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -944,7 +954,6 @@
         "y": 10
       },
       "id": 116,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -962,9 +971,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "imageregistry_build_info",
           "hide": false,
@@ -973,8 +986,6 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Image Registry",
       "type": "stat"
     },
@@ -1018,7 +1029,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1051,7 +1065,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1061,6 +1075,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "ceph_health_status == 0",
           "interval": "",
@@ -1078,9 +1096,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "CNS Status",
       "tooltip": {
         "shared": true,
@@ -1089,38 +1105,31 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "Excludes infrastructure namespaces",
       "fieldConfig": {
         "defaults": {
@@ -1129,11 +1138,13 @@
           },
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1160,7 +1171,6 @@
         "y": 12
       },
       "id": 38,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1178,9 +1188,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "count(kube_namespace_labels{namespace!~\"(default|kube|openshift).*\"})",
           "hide": false,
@@ -1193,28 +1207,43 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPostfix": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "Excludes control plane",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
         "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 2,
@@ -1223,42 +1252,29 @@
         "y": 12
       },
       "id": 34,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "cores",
-      "postfixFontSize": "30%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!=\"master\"})",
           "hide": false,
@@ -1267,22 +1283,14 @@
           "refId": "B"
         }
       ],
-      "thresholds": "",
       "title": "Allocatable Cores",
-      "type": "singlestat",
-      "valueFontSize": "70%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1290,11 +1298,13 @@
           },
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1321,7 +1331,6 @@
         "y": 13
       },
       "id": 117,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1339,9 +1348,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_info{namespace=\"openshift-logging\", pod=~\"fluentd.*\"})",
           "hide": false,
@@ -1350,14 +1363,14 @@
           "refId": "B"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "Fluentd",
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1367,11 +1380,13 @@
           "decimals": 0,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1398,7 +1413,6 @@
         "y": 14
       },
       "id": 40,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1416,9 +1430,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_status_ready{condition=\"true\",namespace!~\"(default|kube|openshift).*\"})",
           "format": "time_series",
@@ -1429,6 +1447,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_status_ready{condition=\"true\",namespace!~\"(default|kube|openshift).*\"})",
           "hide": false,
@@ -1441,27 +1463,43 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "Persistent volume claims for applications",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
         "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
       },
       "gridPos": {
         "h": 2,
@@ -1470,42 +1508,29 @@
         "y": 14
       },
       "id": 42,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "GiB",
-      "postfixFontSize": "30%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
       },
-      "tableColumn": "",
+      "pluginVersion": "9.2.10",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_persistentvolumeclaim_resource_requests_storage_bytes {namespace!~\"(default|kube|openshift).*\"})/1e+9",
           "format": "time_series",
@@ -1516,6 +1541,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(kube_persistentvolumeclaim_resource_requests_storage_bytes {namespace!~\"(default|kube|openshift).*\"})/1e+9",
           "hide": false,
@@ -1524,25 +1553,18 @@
           "refId": "B"
         }
       ],
-      "thresholds": "",
       "title": "Allocated App Storage",
-      "type": "singlestat",
-      "valueFontSize": "70%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "avg"
+      "type": "stat"
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1577,7 +1599,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1587,6 +1609,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "sum by (verb) (rate(apiserver_request_total[5m]))",
           "format": "time_series",
           "hide": false,
@@ -1596,9 +1622,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "APIServer Requests by Verb",
       "tooltip": {
         "shared": true,
@@ -1607,34 +1631,25 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1677,7 +1692,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "description": "",
       "fieldConfig": {
@@ -1717,7 +1735,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1727,6 +1745,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "etcd_server_has_leader",
           "format": "time_series",
           "intervalFactor": 1,
@@ -1744,9 +1766,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Etcd Server has Leader",
       "tooltip": {
         "shared": true,
@@ -1755,9 +1775,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1772,23 +1790,21 @@
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1797,6 +1813,15 @@
       },
       "id": 30,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Cluster Metrics",
       "type": "row"
     },
@@ -1805,7 +1830,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 2,
       "description": "",
       "fieldConfig": {
@@ -1845,7 +1873,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1855,6 +1883,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "http_request_duration_microseconds{job=\"router-internal-default\", quantile=\"0.5\"}",
           "format": "time_series",
           "intervalFactor": 1,
@@ -1863,9 +1895,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "HTTP Request Duration by Router Pod",
       "tooltip": {
         "shared": true,
@@ -1874,35 +1904,26 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "µs",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -1910,7 +1931,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "description": "Containers in cluster by state, excluding Running and Completed pod status",
       "fieldConfig": {
@@ -1949,7 +1973,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1959,27 +1983,38 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum by (reason) (kube_pod_container_status_waiting_reason)",
           "format": "time_series",
+          "hide": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{reason}}",
+          "range": true,
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "expr": "sum by (reason) (kube_pod_container_status_terminated_reason{reason=~\"ContainerCannotRun|Error|OOMKilled\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "{{reason}}",
+          "range": true,
           "refId": "B"
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Waiting and Terminated Containers",
       "tooltip": {
         "shared": true,
@@ -1988,9 +2023,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -1998,9 +2031,7 @@
         {
           "decimals": 0,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
@@ -2009,14 +2040,11 @@
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2024,7 +2052,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2059,7 +2090,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2069,28 +2100,44 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "expr": "histogram_quantile(0.99, sum(rate(kubelet_runtime_operations_duration_seconds_bucket[5m])) by (operation_type, le))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "runtime: {{operation_type}}",
+          "range": true,
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "expr": "histogram_quantile(0.99, sum(rate(kubelet_cgroup_manager_duration_seconds_bucket[5m])) by (operation_type, le))",
           "legendFormat": "cgroup: {{operation_type}}",
+          "range": true,
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "expr": "histogram_quantile(0.99, sum(rate(kubelet_pod_worker_duration_seconds_bucket[5m])) by (operation_type, le))",
           "legendFormat": "worker: {{operation_type}}",
+          "range": true,
           "refId": "C"
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Kubelet Operations Latency",
       "tooltip": {
         "shared": true,
@@ -2099,34 +2146,25 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "s",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2134,11 +2172,15 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "links": []
+          "links": [],
+          "unit": "s"
         },
         "overrides": []
       },
@@ -2169,7 +2211,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2179,20 +2221,24 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "avg by (operation_type) (rate(container_runtime_crio_operations_latency_microseconds[5m]))",
+          "expr": "avg by (operation) (rate(container_runtime_crio_operations_latency_seconds[5m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{operation_type}}",
+          "legendFormat": "{{operation}}",
+          "range": true,
           "refId": "A"
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Container Runtime Operations Latency",
       "tooltip": {
         "shared": true,
@@ -2201,34 +2247,25 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "µs",
-          "label": null,
+          "format": "s",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2271,7 +2308,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "description": "",
       "fieldConfig": {
@@ -2311,7 +2351,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2321,15 +2361,27 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (alertname, severity)(ALERTS{alertname!~\"Watchdog|MachineWithoutRunningPhase|MachineWithNoRunningPhase|MachineWithoutValidNode|CannotRetrieveUpdates|PersistentVolumeUsageCritical|FluentDHighErrorRate|FluentdQueueLengthIncreasing|FluentDVeryHighErrorRate\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
+          "expr": "sum by (alertname, severity)(ALERTS{alertname!~\"Watchdog\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{alertname}} ({{severity}})",
+          "range": true,
           "refId": "A"
         },
         {
-          "expr": "sum by (alertname,severity)(ALERTS{severity=\"critical\",alertname!~\"Watchdog|MachineWithoutRunningPhase|MachineWithNoRunningPhase|MachineWithoutValidNode|CannotRetrieveUpdates|PersistentVolumeUsageCritical|FluentDHighErrorRate|FluentdQueueLengthIncreasing|FluentDVeryHighErrorRate\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
+          "expr": "sum by (alertname,severity)(ALERTS{severity=\"critical\",alertname!~\"Watchdog\"})",
           "legendFormat": "{{alertname}} ({{severity}})",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -2343,9 +2395,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Alerts by State",
       "tooltip": {
         "shared": true,
@@ -2354,9 +2404,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2366,23 +2414,17 @@
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2390,7 +2432,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2425,7 +2470,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2435,6 +2480,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "code:apiserver_request_total:rate:sum",
           "format": "time_series",
           "hide": false,
@@ -2444,9 +2493,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "APIServer Requests by Status",
       "tooltip": {
         "shared": true,
@@ -2455,39 +2502,33 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2496,6 +2537,15 @@
       },
       "id": 103,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Cluster Capacity",
       "type": "row"
     },
@@ -2561,7 +2611,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 2,
       "description": "Kubernetes schedules based on CPU and memory pod requests",
       "fieldConfig": {
@@ -2601,7 +2654,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2611,6 +2664,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(sum by (pod) (kube_pod_container_resource_requests{resource=\"cpu\"}) and count (kube_pod_status_phase{phase=~\"Running|Pending|Unknown\"} == 1) by (pod)) / sum (kube_node_status_allocatable{resource=\"cpu\"})",
           "format": "time_series",
@@ -2622,6 +2679,10 @@
           "step": 120
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(sum by (pod) (kube_pod_container_resource_requests{resource=\"memory\"}) and count(kube_pod_status_phase{phase=~\"Running|Pending|Unknown\"} == 1) by (pod)) / sum (kube_node_status_allocatable{resource=\"memory\"})",
           "format": "time_series",
@@ -2631,6 +2692,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(sum by (pod) (kube_pod_container_resource_limits{resource=\"cpu\"}) and count (kube_pod_status_phase{phase=~\"Running|Pending|Unknown\"} == 1) by (pod)) / sum (kube_node_status_allocatable{resource=\"cpu\"})",
           "format": "time_series",
@@ -2640,6 +2705,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum(sum by (pod) (kube_pod_container_resource_limits{resource=\"memory\"}) and count(kube_pod_status_phase{phase=~\"Running|Pending|Unknown\"} == 1) by (pod)) / sum (kube_node_status_allocatable{resource=\"memory\"})",
           "format": "time_series",
@@ -2659,9 +2728,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Cluster Pod Requests and Limits",
       "tooltip": {
         "shared": true,
@@ -2670,9 +2737,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -2682,23 +2747,17 @@
           "format": "percentunit",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2740,7 +2799,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -2779,7 +2841,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2789,6 +2851,10 @@
       "steppedLine": true,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "kubelet_running_pods",
           "format": "time_series",
@@ -2810,9 +2876,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Pods per Node",
       "tooltip": {
         "shared": true,
@@ -2821,35 +2885,26 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": false,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2857,7 +2912,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "decimals": 0,
       "fieldConfig": {
         "defaults": {
@@ -2894,7 +2952,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2904,6 +2962,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "sum by (namespace) (node_namespace_pod:kube_pod_info:{namespace!~\"(openshift).*\"})",
           "format": "time_series",
           "instant": false,
@@ -2914,9 +2976,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Pods per App Namespace",
       "tooltip": {
         "shared": true,
@@ -2925,35 +2985,26 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
-          "decimals": null,
           "format": "short",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
-          "decimals": null,
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -2995,7 +3046,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -3029,7 +3083,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3039,6 +3093,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "expr": "100 * sort_desc(sum (kubelet_volume_stats_used_bytes{namespace!~\"[0-9].*\"}) by (persistentvolumeclaim, namespace) / sum (kubelet_volume_stats_capacity_bytes) by (persistentvolumeclaim, namespace))",
           "format": "time_series",
           "intervalFactor": 1,
@@ -3056,9 +3114,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Persistent Volume Claim Used %",
       "tooltip": {
         "shared": true,
@@ -3067,9 +3123,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
@@ -3085,21 +3139,20 @@
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3108,6 +3161,15 @@
       },
       "id": 121,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "ETCD Objects",
       "type": "row"
     },
@@ -3116,10 +3178,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3147,7 +3208,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3157,17 +3218,21 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by (resource) (etcd_object_counts)",
+          "expr": "sum(resource:apiserver_storage_objects:max)",
           "interval": "",
           "legendFormat": "{{resource}}",
+          "range": true,
           "refId": "A"
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "ETCD object counts",
       "tooltip": {
         "shared": true,
@@ -3176,33 +3241,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -3210,10 +3266,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3241,7 +3296,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3251,6 +3306,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum by (namespace) (kube_secret_info)",
           "interval": "",
@@ -3268,33 +3327,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -3302,10 +3352,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3333,7 +3382,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3343,6 +3392,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum by (namespace) (kube_configmap_info)",
           "interval": "",
@@ -3360,33 +3413,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -3394,10 +3438,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bkfKPtKHz"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -3425,7 +3468,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.15",
+      "pluginVersion": "9.2.10",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -3435,6 +3478,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bkfKPtKHz"
+          },
           "exemplar": true,
           "expr": "sum by (namespace) (event_recorder_total_events_count)",
           "interval": "",
@@ -3452,46 +3499,37 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "2022-11-28T09:24:08.964Z",
-    "to": "2022-11-28T23:59:59.000Z"
+    "from": "2025-05-08T12:00:03.182Z",
+    "to": "2025-05-08T23:01:04.965Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -3521,5 +3559,6 @@
   "timezone": "",
   "title": "Container Platform/Cluster Metrics",
   "uid": "194e87c86fabc92da5959feb06e8353f",
-  "version": 23
+  "version": 9,
+  "weekStart": ""
 }
